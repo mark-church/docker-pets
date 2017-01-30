@@ -39,9 +39,9 @@ The `web` container has several configuration parameters as environment variable
 
 ####Voting Option Configuration
 
-- **`OPTION_A`**: Defaults to 'Cats'. Pictures located in `/pets/web/static/option_a`
-- **`OPTION_B`**: Defaults to 'Dogs'. Pictures located in `/pets/web/static/option_b`
-- **`OPTION_C`**: Defaults to 'Whales'. Pictures located in `/pets/web/static/option_c`
+- **`OPTION_A`**: Defaults to 'Cats'. Pictures located in `/docker-paas/web/static/option_a`
+- **`OPTION_B`**: Defaults to 'Dogs'. Pictures located in `/docker-paas/web/static/option_b`
+- **`OPTION_C`**: Defaults to 'Whales'. Pictures located in `/docker-paas/web/static/option_c`
 
 
 
