@@ -18,7 +18,7 @@ Docker Swarm can easily be set up to run applications on a single developer lapt
 This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/pets/blob/master/pets-dev-compose.yml).
 
 ```
-$ docker stack deploy -c pets-dev-compose.yml paas
+~/docker-paas $ docker stack deploy -c pets-dev-compose.yml paas
 ```
 
 ![](images/pets-dev-arch.png) 
@@ -53,6 +53,7 @@ Production apps have entirely different requirements when it comes to security, 
 This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
 
 ```
+$ echo `mysecret` | docker secret create admin_password_v1 -
 $ docker stack deploy -c pets-prod-compose.yml paas
 ```
 
