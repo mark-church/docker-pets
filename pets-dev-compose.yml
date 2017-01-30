@@ -2,11 +2,9 @@ version: '3'
 services:
     web:
         image: chrch/paas:1.0
-        command: sh -c 'python app.py & python admin.py & python test.py'
-        tty: true
         deploy:
             mode: replicated
-            replicas: 1
+            replicas: 2
         healthcheck:
             interval: 10s
             timeout: 2s
@@ -20,7 +18,7 @@ services:
         networks:
             - backend
         volumes:
-            - ~/lab/pets/web:/app
+            - ~/docker-paas/web:/app
 
   
     db:
