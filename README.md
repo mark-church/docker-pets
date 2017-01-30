@@ -6,6 +6,11 @@ PaaS is comprised of two images:
 - `chrch/paas` is a front-end Python Flask container that serves up random images of housepets, depending on the given configuration
 - `consul` is a back-end KV store that stores the number of visits that the `web` services recieve. It's configured to bootstrap itself with 3 replicas so that we have fault tolerant persistence.
 
+###Running a Single Contianer, Stateless App
+```
+$ docker run -it -p 5000:5000 chrch/paas
+```
+
 
 ###Running PaaS on Swarm & UCP in Development
 Docker Swarm can easily be set up to run applications on a single developer laptop. The full app can be brought up to run in the same way it would run in production. We use a compose v3 file to deploy a fully fault tolerant frontend and backend, along with the configurations, secrets, and networks required for the application to run.
@@ -13,10 +18,7 @@ Docker Swarm can easily be set up to run applications on a single developer lapt
 This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/pets/blob/master/pets-dev-compose.yml).
 
 ```
-$ docker stack deploy -c pets-dev-compose.yml pets
-Creating network pets_backend
-Creating service pets_db
-Creating service pets_web
+$ docker stack deploy -c pets-dev-compose.yml paas
 ```
 
 ![](images/pets-dev-arch.png) 
@@ -51,10 +53,7 @@ Production apps have entirely different requirements when it comes to security, 
 This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
 
 ```
-$ docker stack deploy -c pets-prod-compose.yml pets
-Creating network pets_backend
-Creating service pets_db
-Creating service pets_web
+$ docker stack deploy -c pets-prod-compose.yml paas
 ```
 
 ![](images/pets-prod-arch.png) 
