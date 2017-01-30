@@ -1,0 +1,89 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F7F8F9;
+  height: 100vh;
+  font-family: 'Open Sans';
+}
+
+div.title {
+  text-align: center;
+  margin-top: 20px; 
+}
+
+div.title p {
+  text-align: left; 
+}
+
+
+div.wrapper {
+  width: 800px;
+  margin-top:90px;
+  position:absolute;
+  left:50%;
+  margin-left:-400px;
+
+}
+
+div.stats {
+  display: inline-block;
+  float:right;
+  text-align: center;
+  margin-right:50px;
+  margin-top:70px;
+  font-size: 1.3em;
+}
+
+div.container {
+  display: inline-block;
+  float:left;
+  text-align: center;
+}
+
+img.centerfold {
+border: 20px solid #1aaaf8;
+width:350px;
+}
+
+
+b {
+  color: #00cbca;
+} 
+
+h2 {
+    color: #1aaaf8;
+}
+
+h4 {
+  font-size: 20px;
+  color: #253237;
+}
+
+#directions {
+  font-size: 20px;
+  color: #253237;
+}
+
+input[type="text"]  {
+    background-color: transparent;
+    color: #253237;
+    outline: none;
+    outline-style: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #253237 2px;
+    padding: 3px 10px;
+    width: 250px;
+    font-size: 16px;
+    text-align: center;
+}
+
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* Firefox 18- */
+input:focus::-moz-placeholder { color:transparent; } /* Firefox 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* oldIE ;) */
+
+

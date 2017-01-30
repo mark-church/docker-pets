@@ -1,0 +1,45 @@
+version: '3'
+services:
+    web:
+        image: chrch/paas:1.0
+        command: sh -c 'python app.py & python admin.py & python test.py'
+        tty: true
+        deploy:
+            mode: replicated
+            replicas: 1
+        healthcheck:
+            interval: 10s
+            timeout: 2s
+            retries: 3
+        ports:
+            - 5000:5000
+            - 7000:7000
+        environment:
+            DB: 'db'
+            DEBUG: 'True'
+        networks:
+            - backend
+        volumes:
+            - ~/lab/pets/web:/app
+
+  
+    db:
+        image: consul:0.7.2
+        command: agent -server -ui -client=0.0.0.0 -bootstrap-expect=3 -retry-join=db -retry-join=db -retry-join=db -retry-interval 5s
+        deploy:
+            replicas: 3
+        ports:
+            - 8500:8500 
+        environment:
+            CONSUL_BIND_INTERFACE: 'eth2'
+            CONSUL_LOCAL_CONFIG: '{"skip_leave_on_interrupt": true}'
+        networks: 
+            - backend
+            
+networks:
+    backend:
+
+
+
+
+

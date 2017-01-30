@@ -1,0 +1,32 @@
+<html>
+  <head>  
+    <link rel='stylesheet' type='text/css' href="../static/style.css">
+    <title>Docker PaaS</title>
+  </head>
+
+  <body>
+    <div class="title">
+      <p style="text-align:left; margin-left:50px;"><img src="../static/docker_logo.png" width="100px"></p>
+      <h2>Docker Pets as a Service</h2>
+    </div>
+
+    <div class="wrapper">
+
+      <div class="container">
+        <img src="{{url}}" class="centerfold"/>
+      </div>
+      <div class="stats">
+        <br><p>Login to the PaaS Admin Console</p>
+        <br>
+        <form action="" method="post">
+           <input type="text" placeholder="Password" name="password" value="{{
+            request.form.password }}">
+          <input class="btn btn-default" type="submit" value="Login">
+        </form>
+        {% if error %}
+          <p class="error">Error: {{ error }}</p>
+        {% endif %}
+      </div>
+
+  </body>
+</html>

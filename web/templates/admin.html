@@ -1,0 +1,52 @@
+<html>
+  <head>  
+    <link rel='stylesheet' type='text/css' href="../static/style.css">
+    <title>Docker PaaS</title>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['Pets', 'Votes'],
+        ['{{option_a}}', {{a_votes}}],
+        ['{{option_b}}', {{b_votes}}],
+        ['{{option_c}}', {{c_votes}}]
+      ]);
+
+        var options = { backgroundColor: '#f7f8f9', chartArea:{
+      backgroundColor: '#f7f8f9'}};
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+
+  </head>
+
+
+  <body>
+    <div class="title">
+      <p style="text-align:left; margin-left:50px;"><img src="../static/docker_logo.png" width="100px"></p>
+      <h2>Docker PaaS Admin Console</h2>
+    </div>
+    
+    <div class="wrapper">
+
+
+    <div id="columnchart_material" style="width: 800px; height: 400px;"></div>
+    <div style="text-align:center;">
+          <br>
+
+          Processed by container ID <b>{{hostname}}</b>
+          <br>
+          <br>
+        </div>
+
+    </div>
+
+  </body>
+</html>

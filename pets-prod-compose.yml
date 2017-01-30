@@ -1,0 +1,56 @@
+version: '3.1'
+services:
+    web:
+        image: chrch/paas:1.0
+        deploy:
+            mode: replicated
+            replicas: 2
+            labels:
+                com.docker.ucp.mesh.http.5000: "external_route=http://pets.dckr.org,internal_port=5000"
+                com.docker.ucp.mesh.http.7000: "external_route=http://admin.pets.dckr.org,internal_port=7000,sticky_sessions=paas_admin_id"
+        ports:
+            - 5000
+            - 7000
+        healthcheck:
+            interval: 10s
+            timeout: 2s
+            retries: 3
+
+        environment:
+            DB: 'db'
+            DEBUG: 'True'
+            ADMIN_PASSWORD_FILE: '/run/secrets/admin_password_v1'
+        networks:
+            - backend
+            - ucp-hrm
+        secrets:
+            - source: admin_password_v1
+              target: admin_password_v1
+              uid: "0"
+              gid: "0"
+              mode: 0400
+    
+    db:
+        image: consul:0.7.2
+        command: agent -server -ui -client=0.0.0.0 -bootstrap-expect=3 -retry-join=db -retry-join=db -retry-join=db -retry-interval 5s
+        deploy:
+            replicas: 3
+        ports:
+            - 8500:8500 
+        environment:
+            CONSUL_BIND_INTERFACE: 'eth2'
+            CONSUL_LOCAL_CONFIG: '{"skip_leave_on_interrupt": true}'
+        networks: 
+            - backend
+            
+networks:
+    backend:
+    ucp-hrm:
+        external: true
+
+secrets:
+    admin_password_v1:
+        external: true
+
+
+
