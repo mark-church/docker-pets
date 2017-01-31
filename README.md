@@ -18,6 +18,7 @@ Docker Swarm can easily be set up to run applications on a single developer lapt
 This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/pets/blob/master/pets-dev-compose.yml).
 
 ```
+$ git clone https://github.com/mark-church/docker-paas
 ~/docker-paas $ docker stack deploy -c pets-dev-compose.yml paas
 ```
 
