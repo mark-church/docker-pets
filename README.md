@@ -55,8 +55,6 @@ The `web` container has several configuration parameters as environment variable
 - **`OPTION_C`**: Defaults to 'Whales'. Pictures located in `/docker-paas/web/static/option_c`
 
 
-####Voting page
-![](images/paas_shot1.png) 
 
 
 
@@ -71,4 +69,19 @@ $ docker stack deploy -c pets-prod-compose.yml paas
 ```
 
 ![](images/pets-prod-arch.png) 
+
+###Using PaaS
+
+####Client Voting
+![](images/paas_shot1.png) 
+
+
+
+####Admin Console Login (with secrets)
+![](images/paas-shot3.png) 
+
+
+####Admin Console Results Page
+![](images/paas_shot4.png) 
+
 
