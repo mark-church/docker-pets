@@ -6,7 +6,7 @@ PaaS is comprised of two images:
 - `chrch/paas` is a front-end Python Flask container that serves up random images of housepets, depending on the given configuration
 - `consul` is a back-end KV store that stores the number of visits that the `web` services recieve. It's configured to bootstrap itself with 3 replicas so that we have fault tolerant persistence.
 
-###Running a Single Contianer, Stateless App
+###Running PaaS as a Single Contianer, Stateless App
 ```
 $ docker run -it -p 5000:5000 chrch/paas
 ```
@@ -18,17 +18,22 @@ Docker Swarm can easily be set up to run applications on a single developer lapt
 This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/pets/blob/master/pets-dev-compose.yml).
 
 ```
-$ docker node ls
+$ git clone https://github.com/mark-church/docker-paas
+
+~/docker-paas$ docker -v
+Docker version 1.13.1-rc1, build 2527cfc
+
+~/docker-paas$ docker node ls
 ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 fd3ovikiq7tzmdr70zukbsgbs *  moby      Ready   Active        Leader
-$ git clone https://github.com/mark-church/docker-paas
-~/docker-paas $ docker stack deploy -c pets-dev-compose.yml paas
+
+~/docker-paas$ docker stack deploy -c pets-dev-compose.yml paas
 ```
 
 ![](images/pets-dev-arch.png) 
 
 
-####**`paas`** configuration parameters
+###PaaS configuration parameters
 The `web` container has several configuration parameters as environment variables:
 
 
@@ -48,10 +53,12 @@ The `web` container has several configuration parameters as environment variable
 - **`OPTION_C`**: Defaults to 'Whales'. Pictures located in `/docker-paas/web/static/option_c`
 
 
+####Voting page
+![](images/paas_shot1.png) 
 
 
 
-###Running PaaS on UCP in Production
+###Running PaaS on Docker UCP in Production
 Production apps have entirely different requirements when it comes to security, deployment, and also security. Fortunately, deployment on Swarm & UCP is very much the same from development to production. Some minor additions to our compose file add in capabilities for secrets and also for L7 load balancing.
 
 This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
