@@ -78,10 +78,10 @@ $ docker stack deploy -c pets-prod-compose.yml paas
 
 
 ####Admin Console Login (with secrets)
-![](images/paas-shot3.png) 
+![](images/paas_shot4.png) 
 
 
 ####Admin Console Results Page
-![](images/paas_shot4.png) 
+![](images/paas-shot3.png) 
 
 
