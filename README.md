@@ -1,7 +1,7 @@
 #Docker Pets as a Service
 PaaS is a simple application that's useful for testing out features of Docker Datacenter.
 
-If you are interested in contributing to Docker PaaS please check out the [Release Notes & Roadmap.](https://github.com/mark-church/pets/blob/master/ROADMAP.md).
+If you are interested in contributing to Docker PaaS please check out the [Release Notes & Roadmap.](https://github.com/mark-church/docker-paas/blob/master/ROADMAP.md).
 
 PaaS is comprised of two images:
 
