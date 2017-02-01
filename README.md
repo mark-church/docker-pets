@@ -12,12 +12,15 @@ $ docker run -it -p 5000:5000 chrch/paas
 ```
 
 
-###Running PaaS on Swarm & UCP in Development
+###Running PaaS on Docker for Mac/Windows in Development
 Docker Swarm can easily be set up to run applications on a single developer laptop. The full app can be brought up to run in the same way it would run in production. We use a compose v3 file to deploy a fully fault tolerant frontend and backend, along with the configurations, secrets, and networks required for the application to run.
 
 This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/pets/blob/master/pets-dev-compose.yml).
 
 ```
+$ docker node ls
+ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
+fd3ovikiq7tzmdr70zukbsgbs *  moby      Ready   Active        Leader
 $ git clone https://github.com/mark-church/docker-paas
 ~/docker-paas $ docker stack deploy -c pets-dev-compose.yml paas
 ```
@@ -48,7 +51,7 @@ The `web` container has several configuration parameters as environment variable
 
 
 
-###Running Pets on Swarm & UCP in Production
+###Running PaaS on UCP in Production
 Production apps have entirely different requirements when it comes to security, deployment, and also security. Fortunately, deployment on Swarm & UCP is very much the same from development to production. Some minor additions to our compose file add in capabilities for secrets and also for L7 load balancing.
 
 This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
