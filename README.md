@@ -8,7 +8,7 @@ PaaS is comprised of two images:
 - `chrch/paas` is a front-end Python Flask container that serves up random images of housepets, depending on the given configuration
 - `consul` is a back-end KV store that stores the number of visits that the `web` services recieve. It's configured to bootstrap itself with 3 replicas so that we have fault tolerant persistence.
 
-###Running PaaS as a Single Contianer, Stateless App
+###Running PaaS as a Single Container, Stateless App
 ```
 $ docker run -it -p 5000:5000 chrch/paas
 ```

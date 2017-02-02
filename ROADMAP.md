@@ -15,4 +15,12 @@
 - Secrets-protected Admin Console page
 - Sticky admin sessions
 - Toggleable health checks
+
+
+#DDC Doc Examples Roadmap
+- Blue/Green deployment with DDC
+- Rolling updates & rollback with DDC
+- SNI/HTTPS with HRM
+- Application Autoscaling 
+
 
