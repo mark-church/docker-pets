@@ -7,6 +7,7 @@
 - EFS mount to volume for static images (app trigger to use local images if necessary) 
 - Use Jmeter to hit applications and show off CPU and mem limits and also good for demonstrating high availability (what is the error rate when a node dies)
 - SNI/HTTPS with HRM
+- GUI button to simulate app health check failure
 
 **Stretch Goals**
 
@@ -15,11 +16,21 @@
 - Updates for future versions of DDC & Docker Engine
 
 
-#DDC Doc Examples Roadmap
-- Show application under load
-- Show application under load after killing node
+#"How to Demo DDC" Topics for Documentation
+**Basic**
+
+- Compose deployment of app on D4M and DDC
+- Overlay networking at work
+- Scaling a service
+- Health checks & container lifecycle management
+- Secrets
+- Rolling update & rollback
+
+**Advanced**
+
+- Show application under load with Jmeter
+- Show application under load and recovery after killing node
 - Blue/Green deployment with DDC
-- Rolling updates & rollback with DDC
 - SNI/HTTPS with HRM
 - Application Autoscaling 
 
