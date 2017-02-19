@@ -3,7 +3,7 @@ import random, socket, time, json, os, sys, ast, consul
 
 db = os.getenv('DB')
 debug = os.getenv('DEBUG', False)
-admin_password_file = os.getenv('ADMIN_PASSWORD_FILE', None)
+pass_file = os.getenv('ADMIN_PASSWORD_FILE', None)
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
@@ -13,9 +13,13 @@ hostname = socket.gethostname()
 
 admin_id_list = []
 
-if admin_password_file is not None:
-    f = open(admin_password_file, 'r')
-    password = f.readline().rstrip()
+if pass_file is not None:
+    if os.path.isfile(pass_file):
+        f = open(pass_file, 'r')
+        password = f.readline().rstrip()
+    else:
+        print "Incorrect ADMIN_PASSWORD_FILE location given. Given file does not exist."
+        pass_file = None
 
 app = Flask(__name__)
 
@@ -44,7 +48,7 @@ else:
 def index():
     admin_id = request.cookies.get('paas_admin_id')
 
-    if admin_password_file is None:
+    if pass_file is None:
         return redirect('/admin')
 
     error = None

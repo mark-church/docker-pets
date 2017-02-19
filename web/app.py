@@ -15,7 +15,7 @@ option_c_images = os.listdir('./static/option_c')
 
 
 healthy = True
-version ='1.0'
+version ='1.1'
 hostname = socket.gethostname()
 
 sys.stdout.write("Starting web container")
@@ -138,6 +138,12 @@ def health():
                 return "not healthy"
     else:
         return 'ERROR REQUEST MTHD', 500
+
+@app.route('/kill')
+def kill():
+    global healthy
+    healthy = False
+    return 'You have toggled web instance ' + hostname +' to unhealthy', 200
 
 
 def get_image(vote):

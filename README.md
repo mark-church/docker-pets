@@ -64,7 +64,7 @@ Production apps have entirely different requirements when it comes to security, 
 This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
 
 ```
-$ echo `mysecret` | docker secret create admin_password_v1 -
+$ echo "mysecret" | docker secret create admin_password_v1 -
 $ docker stack deploy -c pets-prod-compose.yml paas
 ```
 
