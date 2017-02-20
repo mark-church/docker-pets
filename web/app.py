@@ -8,6 +8,7 @@ vote = option_a
 
 db = os.getenv('DB')
 debug = os.getenv('DEBUG', False)
+threaded = os.getenv('THREADED', False)
 
 option_a_images = os.listdir('./static/option_a')
 option_b_images = os.listdir('./static/option_b')
@@ -164,4 +165,4 @@ def get_image(vote):
 #curl -v http://localhost:8000/health
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=debug)
+    app.run(host="0.0.0.0", port=5000, debug=debug, threaded=threaded)

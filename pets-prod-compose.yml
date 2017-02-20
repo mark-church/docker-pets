@@ -1,7 +1,7 @@
 version: '3.1'
 services:
     web:
-        image: chrch/paas:1.0
+        image: chrch/paas:1.1
         deploy:
             mode: replicated
             replicas: 2
@@ -18,14 +18,15 @@ services:
 
         environment:
             DB: 'db'
-            DEBUG: 'True'
-            ADMIN_PASSWORD_FILE: '/run/secrets/admin_password_v1'
+            DEBUG: 'False'
+            THREADED: 'True'
+            ADMIN_PASSWORD_FILE: '/run/secrets/admin_password'
         networks:
             - backend
             - ucp-hrm
         secrets:
-            - source: admin_password_v1
-              target: admin_password_v1
+            - source: admin_password
+              target: admin_password
               uid: "0"
               gid: "0"
               mode: 0400
@@ -36,7 +37,7 @@ services:
         deploy:
             replicas: 3
         ports:
-            - 8500:8500 
+            - 8500 
         environment:
             CONSUL_BIND_INTERFACE: 'eth2'
             CONSUL_LOCAL_CONFIG: '{"skip_leave_on_interrupt": true}'
@@ -49,8 +50,5 @@ networks:
         external: true
 
 secrets:
-    admin_password_v1:
+    admin_password:
         external: true
-
-
-

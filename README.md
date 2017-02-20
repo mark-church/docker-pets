@@ -1,5 +1,9 @@
 #Docker Pets as a Service
+> written for `chrch/paas:1.1`
+
 PaaS is a simple application that's useful for testing out features of Docker Datacenter.
+
+If you are interested in a guide on how to demo PaaS on the Universal Control Plane then check out [this tutorial](https://github.com/mark-church/pets/blob/master/DEMO-DDC.md).
 
 If you are interested in contributing to Docker PaaS please check out the [Release Notes & Roadmap.](https://github.com/mark-church/docker-paas/blob/master/ROADMAP.md).
 
@@ -43,10 +47,16 @@ The `web` container has several configuration parameters as environment variable
 - **`DEBUG`**: Puts `web` containers in to debug mode. When mounting a volume for code, they will restart automatically when they detect a change in the code. Defaults to off, set to `True` to turn on.
 - **`ADMIN_PASSWORD_FILE`**: Turns secrets on. If set, will password protect the Admin Console of `web`. Set to the full location of the Swarm secret (`/run/secrets/< X >`)
 
-####Services
-- Client web access - `5000/`, voting interface
-- Admin / results UI - port `7000/`
-- Consul UI - `8500/ui`
+####Exposed Services
+- Client Web Access - (dev port `5000`, prod URL `pets.dckr.org`)
+	- `/` shows the selected Pet
+	- `/vote` displays the vote selection
+	- `/kill` toggles the health off for one of the web servers
+- Admin Console - (dev port `7000`, prod URL `admin.pets.dckr.org`)
+	- `/` displays voting results, redirects to `/login` if secrets are configured
+	- `/login` requests login password
+- Consul Backend - (dev port `8500`, prod ephemeral port)
+	- `/ui` displays Consul server UI
 
 ####Voting Option Configuration
 
@@ -59,6 +69,8 @@ The `web` container has several configuration parameters as environment variable
 
 
 ###Running PaaS on Docker UCP in Production
+This [full length tutorial](https://github.com/mark-church/pets/blob/master/DEMO-DDC.md) will show you how to deploy and demo DDC with the PaaS app.
+
 Production apps have entirely different requirements when it comes to security, deployment, and also security. Fortunately, deployment on Swarm & UCP is very much the same from development to production. Some minor additions to our compose file add in capabilities for secrets and also for L7 load balancing.
 
 This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
@@ -69,19 +81,3 @@ $ docker stack deploy -c pets-prod-compose.yml paas
 ```
 
 ![](images/pets-prod-arch.png) 
-
-###Using PaaS
-
-####Client Voting
-![](images/paas_shot1.png) 
-
-
-
-####Admin Console Login (with secrets)
-![](images/paas_shot4.png) 
-
-
-####Admin Console Results Page
-![](images/paas-shot3.png) 
-
-

@@ -15,6 +15,7 @@ services:
         environment:
             DB: 'db'
             DEBUG: 'True'
+            THREADED: 'False'
         networks:
             - backend
         volumes:
