@@ -3,7 +3,7 @@
 
 PaaS is a simple application that's useful for testing out features of Docker Datacenter.
 
-If you are interested in a guide on how to demo PaaS on the Universal Control Plane then check out [this tutorial](https://github.com/mark-church/pets/blob/master/DEMO-DDC.md).
+If you are interested in a guide on how to demo PaaS on the Universal Control Plane then check out [this tutorial](https://github.com/mark-church/docker-paas/blob/master/DEMO-DDC.md).
 
 If you are interested in contributing to Docker PaaS please check out the [Release Notes & Roadmap.](https://github.com/mark-church/docker-paas/blob/master/ROADMAP.md).
 
@@ -21,7 +21,7 @@ $ docker run -it -p 5000:5000 chrch/paas
 ###Running PaaS on Docker for Mac/Windows in Development
 Docker Swarm can easily be set up to run applications on a single developer laptop. The full app can be brought up to run in the same way it would run in production. We use a compose v3 file to deploy a fully fault tolerant frontend and backend, along with the configurations, secrets, and networks required for the application to run.
 
-This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/pets/blob/master/pets-dev-compose.yml).
+This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-dev-compose.yml).
 
 ```
 $ git clone https://github.com/mark-church/docker-paas
@@ -69,11 +69,11 @@ The `web` container has several configuration parameters as environment variable
 
 
 ###Running PaaS on Docker UCP in Production
-This [full length tutorial](https://github.com/mark-church/pets/blob/master/DEMO-DDC.md) will show you how to deploy and demo DDC with the PaaS app.
+This [full length tutorial](https://github.com/mark-church/docker-paas/blob/master/DEMO-DDC.md) will show you how to deploy and demo DDC with the PaaS app.
 
 Production apps have entirely different requirements when it comes to security, deployment, and also security. Fortunately, deployment on Swarm & UCP is very much the same from development to production. Some minor additions to our compose file add in capabilities for secrets and also for L7 load balancing.
 
-This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml).
+This is the full architecture that is deployed when using [pets-prod-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-prod-compose.yml).
 
 ```
 $ echo "mysecret" | docker secret create admin_password_v1 -

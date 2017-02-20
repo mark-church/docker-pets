@@ -2,11 +2,11 @@
 #Use PaaS to Demo Docker Datacenter
 > written for `chrch/paas:1.1`
 
-1) Create a secret for the Admin Console access in the app. Adjust the [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml) file so that it matches the name of your secret. The default in the compose file is `ADMIN_PASSWORD_FILE=/run/secrets/admin_password`. Feel free to use UCP labels to demonstrate RBAC features.
+1) Create a secret for the Admin Console access in the app. Adjust the [pets-prod-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-prod-compose.yml) file so that it matches the name of your secret. The default in the compose file is `ADMIN_PASSWORD_FILE=/run/secrets/admin_password`. Feel free to use UCP labels to demonstrate RBAC features.
 
 ![](images/secret.png) 
 
-2) Deploy [pets-prod-compose.yml](https://github.com/mark-church/pets/blob/master/pets-prod-compose.yml) in UCP as a Docker stack.
+2) Deploy [pets-prod-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-prod-compose.yml) in UCP as a Docker stack.
 
 3) Check the stack's service status and the logs for `paas_web`. It will take up to 30 seconds for the app to become operational.
 
