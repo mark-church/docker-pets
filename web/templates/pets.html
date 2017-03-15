@@ -25,20 +25,19 @@
 
     <div class="petOpts">
       
+      {% if db_exists|string() == "True"|string() %}
       <div class="petOptsLeft">
-        
         <form id="choice" name='form' method="GET" action="/vote">
             <button id="vote" type="submit" name="vote" class="btn">Vote Again</button>
         </form>
       </div>
-
+      {% endif %}
 
       <div class="petOptsRight">
         <form id="choice" name='form' method="GET" action="/">
             <button id="reload" type="submit" name="reload" class="btn">Serve Another Pet</button> 
         </form>
-      </div>
-
+      </div>    
     </div>
   
 

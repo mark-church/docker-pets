@@ -24,12 +24,9 @@ services:
         networks:
             - backend
             - ucp-hrm
+            
         secrets:
-            - source: admin_password
-              target: admin_password
-              uid: "0"
-              gid: "0"
-              mode: 0400
+            - admin_password
     
     db:
         image: consul:0.7.2

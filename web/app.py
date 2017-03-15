@@ -6,7 +6,8 @@ option_b = os.getenv('OPTION_B', "Dogs")
 option_c = os.getenv('OPTION_C', "Whales")
 vote = option_a
 
-db = os.getenv('DB')
+db = os.getenv('DB', False)
+db_exists = False
 debug = os.getenv('DEBUG', False)
 threaded = os.getenv('THREADED', False)
 
@@ -15,15 +16,17 @@ option_b_images = os.listdir('./static/option_b')
 option_c_images = os.listdir('./static/option_c')
 
 
-healthy = True
-version ='1.1'
+healthy = False
+version ='1.1-broken'
 hostname = socket.gethostname()
 
-sys.stdout.write("Starting web container")
+print "Starting web container %s" % hostname
 
 app = Flask(__name__)
 
 if db:
+
+    db_exists = True
 
     if ':' in db:
         (address, port) = db.split(':')
@@ -32,7 +35,7 @@ if db:
         port = 8500
         db = address + ':' + str(port)
 
-    time.sleep(10)
+    time.sleep(5)
     
     #Connect to Consul
     c = consul.Consul(host=address, port=port)
@@ -51,7 +54,7 @@ def index():
     vote_cookie = request.cookies.get('vote')
 
     
-    if db is None:
+    if db is False:
         vote = option_b
     elif vote_cookie is None:
         return redirect('/vote')
@@ -70,10 +73,12 @@ def index():
         newHits = int(hits["Value"]) + 1
         c.kv.put('hits', str(newHits))
         hit_string = str(newHits) + " Pets Served"
+
     if not db:
         hit_string = ""
+        db_exists == str(db_exists)
 
-    return render_template('pets.html', url=url, hostname=hostname, hit_string=hit_string, title=vote, version=version)
+    return render_template('pets.html', url=url, hostname=hostname, hit_string=hit_string, title=vote, version=version, db_exists=db_exists)
 
 @app.route("/vote", methods=['POST','GET'])
 def vote():

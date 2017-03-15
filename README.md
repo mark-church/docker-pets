@@ -33,7 +33,7 @@ Docker version 1.13.1-rc1, build 2527cfc
 ID                           HOSTNAME  STATUS  AVAILABILITY  MANAGER STATUS
 fd3ovikiq7tzmdr70zukbsgbs *  moby      Ready   Active        Leader
 
-~/docker-paas$ docker stack deploy -c pets-dev-compose.yml paas
+~/docker-paas$ docker stack deploy -c pets-dev-compose.yml pets
 ```
 
 ![](images/pets-dev-arch.png) 
@@ -51,6 +51,7 @@ The `web` container has several configuration parameters as environment variable
 - Client Web Access - (dev port `5000`, prod URL `pets.dckr.org`)
 	- `/` shows the selected Pet
 	- `/vote` displays the vote selection
+	- `/health` displays the application health of the given container
 	- `/kill` toggles the health off for one of the web servers
 - Admin Console - (dev port `7000`, prod URL `admin.pets.dckr.org`)
 	- `/` displays voting results, redirects to `/login` if secrets are configured
@@ -77,7 +78,7 @@ This is the full architecture that is deployed when using [pets-prod-compose.yml
 
 ```
 $ echo "mysecret" | docker secret create admin_password_v1 -
-$ docker stack deploy -c pets-prod-compose.yml paas
+$ docker stack deploy -c pets-prod-compose.yml pets
 ```
 
 ![](images/pets-prod-arch.png) 
