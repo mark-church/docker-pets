@@ -6,8 +6,8 @@ services:
             mode: replicated
             replicas: 2
             labels:
-                com.docker.ucp.mesh.http.5000: "external_route=http://<pets-ip>,internal_port=5000"
-                com.docker.ucp.mesh.http.7000: "external_route=http://<admin-console-ip>,internal_port=7000,sticky_sessions=paas_admin_id"
+                com.docker.ucp.mesh.http.5000: "external_route=http://<pets.url>,internal_port=5000"
+                com.docker.ucp.mesh.http.7000: "external_route=http://<admin.url>,internal_port=7000,sticky_sessions=paas_admin_id"
         ports:
             - 5000
             - 7000
@@ -21,10 +21,10 @@ services:
             DEBUG: 'False'
             THREADED: 'True'
             ADMIN_PASSWORD_FILE: '/run/secrets/admin_password'
+
         networks:
             - backend
             - ucp-hrm
-
         secrets:
             - admin_password
     
@@ -48,6 +48,8 @@ services:
         deploy:
             placement:
                 constraints: [node.role == manager]
+            labels:
+                com.docker.ucp.mesh.http.8080: "external_route=http://<viz.url>,internal_port=8080"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             
