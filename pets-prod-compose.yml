@@ -6,8 +6,8 @@ services:
             mode: replicated
             replicas: 2
             labels:
-                com.docker.ucp.mesh.http.5000: "external_route=http://pets.dckr.org,internal_port=5000"
-                com.docker.ucp.mesh.http.7000: "external_route=http://admin.pets.dckr.org,internal_port=7000,sticky_sessions=paas_admin_id"
+                com.docker.ucp.mesh.http.5000: "external_route=http://<pets-ip>,internal_port=5000"
+                com.docker.ucp.mesh.http.7000: "external_route=http://<admin-console-ip>,internal_port=7000,sticky_sessions=paas_admin_id"
         ports:
             - 5000
             - 7000
