@@ -1,4 +1,5 @@
-#Docker Pets as a Service
+# Docker Pets as a Service
+
 > written for `chrch/paas:1.1`
 
 PaaS is a simple application that's useful for testing out features of Docker Datacenter.
@@ -12,13 +13,15 @@ PaaS is comprised of two images:
 - `chrch/paas` is a front-end Python Flask container that serves up random images of housepets, depending on the given configuration
 - `consul` is a back-end KV store that stores the number of visits that the `web` services recieve. It's configured to bootstrap itself with 3 replicas so that we have fault tolerant persistence.
 
-###Running PaaS as a Single Container, Stateless App
+## Running PaaS as a Single Container, Stateless App
+
 ```
 $ docker run -it -p 5000:5000 chrch/paas
 ```
 
 
-###Running PaaS on Docker for Mac/Windows in Development
+## Running PaaS on Docker for Mac/Windows in Development
+
 Docker Swarm can easily be set up to run applications on a single developer laptop. The full app can be brought up to run in the same way it would run in production. We use a compose v3 file to deploy a fully fault tolerant frontend and backend, along with the configurations, secrets, and networks required for the application to run.
 
 This is the full architecture that is deployed when using [pets-dev-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-dev-compose.yml).
@@ -39,7 +42,8 @@ fd3ovikiq7tzmdr70zukbsgbs *  moby      Ready   Active        Leader
 ![](images/pets-dev-arch.png) 
 
 
-###PaaS configuration parameters
+## PaaS configuration parameters
+
 The `web` container has several configuration parameters as environment variables:
 
 
@@ -47,7 +51,8 @@ The `web` container has several configuration parameters as environment variable
 - **`DEBUG`**: Puts `web` containers in to debug mode. When mounting a volume for code, they will restart automatically when they detect a change in the code. Defaults to off, set to `True` to turn on.
 - **`ADMIN_PASSWORD_FILE`**: Turns secrets on. If set, will password protect the Admin Console of `web`. Set to the full location of the Swarm secret (`/run/secrets/< X >`)
 
-####Exposed Services
+## Exposed Services
+
 - Client Web Access - (dev port `5000`, prod URL `pets.dckr.org`)
 	- `/` shows the selected Pet
 	- `/vote` displays the vote selection
@@ -59,17 +64,15 @@ The `web` container has several configuration parameters as environment variable
 - Consul Backend - (dev port `8500`, prod ephemeral port)
 	- `/ui` displays Consul server UI
 
-####Voting Option Configuration
+## Voting Option Configuration
 
 - **`OPTION_A`**: Defaults to 'Cats'. Pictures located in `/docker-paas/web/static/option_a`
 - **`OPTION_B`**: Defaults to 'Dogs'. Pictures located in `/docker-paas/web/static/option_b`
 - **`OPTION_C`**: Defaults to 'Whales'. Pictures located in `/docker-paas/web/static/option_c`
 
 
+## Running PaaS on Docker UCP in Production
 
-
-
-###Running PaaS on Docker UCP in Production
 This [full length tutorial](https://github.com/mark-church/docker-paas/blob/master/DEMO-DDC.md) will show you how to deploy and demo DDC with the PaaS app.
 
 Production apps have entirely different requirements when it comes to security, deployment, and also security. Fortunately, deployment on Swarm & UCP is very much the same from development to production. Some minor additions to our compose file add in capabilities for secrets and also for L7 load balancing.
