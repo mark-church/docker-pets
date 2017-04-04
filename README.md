@@ -1,7 +1,7 @@
 # Docker Pets
 > written for `chrch/docker-pets:1.1`
 
-Docker Petspets is a simple application that's useful for testing out features of Docker Datacenter.
+Docker Pets is a simple application that's useful for testing out features of Docker Datacenter.
 
 If you are interested in a guide on how to demo Docker Pets on the Universal Control Plane then check out [this tutorial](https://github.com/mark-church/docker-pets/blob/master/DEMO-DDC.md).
 
