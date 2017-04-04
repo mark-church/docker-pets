@@ -1,7 +1,7 @@
 # Docker Pets
 > written for `chrch/docker-pets:1.1`
 
-Docker Petspets is a simple application that's useful for testing out features of Docker Datacenter.
+Docker Pets is a simple application that's useful for testing out features of Docker Datacenter.
 
 If you are interested in a guide on how to demo Docker Pets on the Universal Control Plane then check out [this tutorial](https://github.com/mark-church/docker-pets/blob/master/DEMO-DDC.md).
 
@@ -13,19 +13,19 @@ Ppetsets is comprised of two images:
 - `consul` is a back-end KV store that stores the number of visits that the `web` services recieve. It's configured to bootstrap itself with 3 replicas so that we have fault tolerant persistence.
 
 ## Building Pets from Scratch
-Pets is hosted on the Docker Hub but you can also build it locally.
+Pets is hosted on the Docker Hub at `chrch/docker-pets:latest` but you can also build it locally with the following steps
 
 ```
 $ git clone https://github.com/mark-church/docker-pets
 $ cd docker-pets/web
-$ docker build -t chrch/web:1.1 .
+$ docker build -t docker-pets .
 ```
 
 
 
 ## Running Pets as a Single Container, Stateless App
 ```
-$ docker run -it -p 5000:5000 chrch/docker-pets
+$ docker run -it -p 5000:5000 docker-pets
 ```
 
 
