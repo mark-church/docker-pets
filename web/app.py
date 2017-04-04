@@ -16,8 +16,8 @@ option_b_images = os.listdir('./static/option_b')
 option_c_images = os.listdir('./static/option_c')
 
 
-healthy = False
-version ='1.1-broken'
+healthy = True
+version ='1.1'
 hostname = socket.gethostname()
 
 print "Starting web container %s" % hostname

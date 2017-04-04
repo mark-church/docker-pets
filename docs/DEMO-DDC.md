@@ -1,10 +1,10 @@
 
-#Docker Universal Control Plane Demo Tutorial
+# Docker Universal Control Plane Demo Tutorial
 > written for [Docker Pets as a Service v1.1](https://github.com/mark-church/docker-paas)
 
 This is a tutorial for demoing Docker Universal Control Plane using the Docker PaaS application. 
 
-####Environment Requirements
+#### Environment Requirements
 - Docker Engine 17.03 EE
 - UCP 2.1.x
 - Minimum 2x hosts
@@ -12,24 +12,30 @@ This is a tutorial for demoing Docker Universal Control Plane using the Docker P
 - Ports open for app
 
 
-####Configuring Secrets
-- PaaS uses a secret to access the Admin Console so that votes can be viewed. Before we deploy Paas, the UCP administrator has to create a secret in UCP.  Adjust the [pets-prod-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-prod-compose.yml) file so that it matches the name of your secret. The environment variable `ADMIN_PASSWORD_FILE` must match the location and name of your secret. The default in the compose file is `ADMIN_PASSWORD_FILE=/run/secrets/admin_password` if your secret is named `admin_password`.
+#### Configuring Secrets
+- PaaS uses a secret to access the Admin Console so that votes can be viewed. Before we deploy Paas, the UCP administrator has to create a secret in UCP.  Adjust the [pets-prod-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-prod-compose.yml) file so that it matches the name of your secret. The environment variable `ADMIN_PASSWORD_FILE` must match the location and name of your secret. The default in the compose file is `ADMIN_PASSWORD_FILE=/run/secrets/admin_password` if your secret is named `admin_password`. Use whatever secret you like. If your secret is named `mysecret` then the value of `ADMIN_PASSWORD_FILE` would be `/run/secrets/mysecret`.
+
+
+#### Configuring HRM
+- Configure the `pets-prod-compose.yml` with the correct HTTP Routing URLs. Replace `<pets-ip>` and `<admin-console-ip>` with the values `pets.app<team>.dac.dckr.org` and `admin.app<team>.dac.dckr.org`. Replace `<team>` with your team.
 
 ![](images/secret.png) 
 
-####Deploying with Compose
+#### Deploying with Compose
 - Now deploy the application with your compose file, [pets-prod-compose.yml](https://github.com/mark-church/docker-paas/blob/master/pets-prod-compose.yml) in UCP as a Docker stack.
 
 - Check the stack's service status and the logs for the `web` service. It will take up to 30 seconds for the app to become operational. Try going to one of the ports or URLs that the app is running on. You will see the event in the `web` service.
 
 ![](images/logs.png) 
 
-####Load Balancing 
+#### Load Balancing 
 - If DNS and HRM (L7 load balancing) are configured correctly you can access on the configured URL or the ephemeral port chosen by UCP. You can set your `/etc/hosts` file to provide the resolution for the URL set in the compose file.
 
 ![](images/HRM.png) 
 
 - Access the PaaS client page. Input your name and vote for a specific animal.
+
+
 
 ![](images/voting.png) 
 
@@ -40,12 +46,25 @@ This is a tutorial for demoing Docker Universal Control Plane using the Docker P
 
 ![](images/animal.png) 
 
-####Scaling and Deploying Application Instances
+- Log in to the admin console using the URL or port exposed by UCP. Use the secret password specified in Step 1.
+
+![](images/login.png) 
+
+- Now view the votes!
+
+![](images/results.png) 
+
+#### Sticky Sessions
+- You may have noticed that the voting page load balances across the web container IDs. When you go to the Admin console, you will notice that the container ID presented is the same every time. That is because UCP is using the `sticky_sessions` option of the L7 load balancer. 
+
+- Try going to the port that is exposed by the Admin Console. The port can be found in the UCP GUI when clicking on the `web` service. Go to this port log in with your secret. Refresh the Admin Console page couple times and you should see the container ID changing. This is because you are accessing it through the L4 port which does not have `sticky_sessions` enabled.
+
+#### Scaling and Deploying Application Instances
 - View how the application has been scheduled across nodes with the "Swarm Visualizer." It's running as the `pets-viz` container and you can see what port it's exposed on in the UCP GUI.
 
 ![](images/viz.png) 
 
-- Scale the application by changing the replicas parameter for the `paas_web` service to '6'. In `pets-viz` we can see additional nodes get scheduled. Back in the application you can see that `Serve Another Pet` is now load balancing you to more containers.
+- Scale the application by changing the replicas parameter for the `paas_web` service to `6`. In `pets-viz` we can see additional nodes get scheduled. Back in the application you can see that `Serve Another Pet` is now load balancing you to more containers.
 
 ![](images/scaling.png) 
 
@@ -60,7 +79,7 @@ This is a tutorial for demoing Docker Universal Control Plane using the Docker P
 
  
 
-####Managing the Application Lifecycle
+#### Managing the Application Lifecycle
 - Check that the application health check is working by going to `/health`. This health check endpoint is advertising the health of the application. UCP uses this health metric to manage the lifecycle of services and will kill and reschedule applications that have been unhealthy.
 
 ![](images/health.png)
@@ -71,12 +90,9 @@ This is a tutorial for demoing Docker Universal Control Plane using the Docker P
 
 - Now go to one of your worker nodes and kill the worker engine with `sudo service docker stop`. In the swarm visualizer you will see the node dissappear and the engines will be rescheduled on the remaining nodes.
 
-- Log in to the admin console using the URL or port exposed by UCP. Use the secret password specified in Step 1.
 
-![](images/login.png) 
 
-- Now view the votes!
 
-![](images/results.png) 
+
 
 
