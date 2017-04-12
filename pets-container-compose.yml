@@ -3,7 +3,7 @@ services:
     web:
         image: docker-pets:latest
         ports:
-            - 5000:5000
+            - 80:5000
         healthcheck:
             interval: 10s
             timeout: 2s
