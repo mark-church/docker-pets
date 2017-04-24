@@ -1,5 +1,4 @@
 # Docker Pets
-> written for `chrch/docker-pets:1.1`
 
 Docker Pets is a simple application that's useful for testing out features of Docker Datacenter.
 
@@ -7,7 +6,15 @@ If you are interested in a guide on how to demo Docker Pets on the Universal Con
 
 If you are interested in contributing to Docker pets please check out the [Release Notes & Roadmap.](https://github.com/mark-church/docker-pets/blob/master/ROADMAP.md).
 
-Ppetsets is comprised of two images:
+## Versioning
+
+- `1.0` is the primary version that should be used for demos.
+- `2.0` is a version with minor visual changes. Use this to demonstrate rolling updates from `1.0` to `2.0`
+- `broken` is a version that reports a failed healthcheck. Use this version to demonstrate an unsucessful rolling update.
+
+## Application Architecture
+
+`docker-pets` can be run as a stateless single-container application or as a multi-container stateful application. The following are the two images used to deploy `docker-pets`:
 
 - `chrch/docker-pets` is a front-end Python Flask container that serves up random images of housepets, depending on the given configuration
 - `consul` is a back-end KV store that stores the number of visits that the `web` services recieve. It's configured to bootstrap itself with 3 replicas so that we have fault tolerant persistence.
