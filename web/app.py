@@ -17,7 +17,7 @@ option_c_images = os.listdir('./static/option_c')
 
 
 healthy = True
-version ='1.0'
+version ='2.0'
 hostname = socket.gethostname()
 
 print "Starting web container %s" % hostname
