@@ -3,7 +3,7 @@ services:
     web:
         #Use following image to download from Docker Hub
         #image: chrch/docker-pets:latest
-        image: docker-pets:latest
+        image: chrch/docker-pets:broken
         deploy:
             mode: replicated
             replicas: 2
