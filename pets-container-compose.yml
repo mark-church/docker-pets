@@ -8,5 +8,3 @@ services:
             interval: 10s
             timeout: 2s
             retries: 3  
-        volumes:
-            - ./web:/app
