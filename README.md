@@ -2,7 +2,7 @@
 
 Docker Pets is a simple application that's useful for testing out features of Docker Datacenter.
 
-If you are interested in a guide on how to demo Docker Pets on the Universal Control Plane then check out [this tutorial](https://github.com/mark-church/docker-pets/blob/master/DEMO-DDC.md).
+If you are interested in a guide on how to demo Docker Pets on the Universal Control Plane then check out [this tutorial](https://github.com/docker/dcus-hol-2017/tree/master/docker-enterprise).
 
 If you are interested in contributing to Docker pets please check out the [Release Notes & Roadmap.](https://github.com/mark-church/docker-pets/blob/master/ROADMAP.md).
 
