@@ -1,4 +1,4 @@
-# Docker Pets
+# Docker Pets - Mark's fun new version
 
 Docker Pets is a simple application that's useful for testing out features of Docker Datacenter.
 
